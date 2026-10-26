@@ -53,7 +53,7 @@ export const CyberDeck: React.FC<CyberDeckProps> = ({ onToggleForm, isFormOpen }
     { type: 'system', text: '>> HOST: HUYNH NHAT HUY // FRONTEND ENGINEER' },
     {
       type: 'guide',
-      text: '--------------------------------------------------\n💡 HƯỚNG DẪN: Click các cổng điều khiển bên dưới hoặc gõ lệnh:\n  • message / form ➔ Mở/đóng form gửi thông điệp trực tiếp\n  • email          ➔ Sao chép địa chỉ email\n  • cv             ➔ Kích hoạt giải mã hồ sơ năng lực PDF\n  • fb / tiktok    ➔ Kết nối mạng xã hội Facebook & TikTok\n  • github / git   ➔ Mở kho mã nguồn dự án GitHub\n  • skills         ➔ Xem danh mục công nghệ cốt lõi\n  • info           ➔ Xem thông số kỹ thuật & bản quyền\n--------------------------------------------------',
+      text: '--------------------------------------------------\n💡 HƯỚNG DẪN: Click các cổng điều khiển bên dưới hoặc gõ lệnh:\n  • message / form ➔ Mở/đóng form gửi thông điệp trực tiếp\n  • email          ➔ Sao chép địa chỉ email\n  • cv             ➔ Tải hồ sơ năng lực PDF (Resume)\n  • fb / tiktok    ➔ Kết nối mạng xã hội Facebook & TikTok\n  • github / git   ➔ Mở kho mã nguồn dự án GitHub\n  • skills         ➔ Xem danh mục công nghệ cốt lõi\n  • info           ➔ Xem thông số kỹ thuật & bản quyền\n--------------------------------------------------',
     },
   ]);
 
@@ -163,16 +163,16 @@ export const CyberDeck: React.FC<CyberDeckProps> = ({ onToggleForm, isFormOpen }
     ]);
   };
 
-  // Decrypt CV Animation
-  const triggerDecryptCV = () => {
+  // Download CV Animation
+  const triggerDownloadCV = () => {
     if (decryptProgress !== null) return;
     soundManager.playButtonClick();
     soundManager.playBeepSuccess();
 
     setMessages((prev) => [
       ...prev,
-      { type: 'user', text: '> execute: decrypt_resume_dossier' },
-      { type: 'system', text: '>> INITIATING QUANTUM DECRYPTION PROTOCOL...' },
+      { type: 'user', text: '> execute: download_cv' },
+      { type: 'system', text: '>> INITIALIZING RESUME DATA STREAM...' },
     ]);
 
     setDecryptProgress(0);
@@ -189,7 +189,7 @@ export const CyberDeck: React.FC<CyberDeckProps> = ({ onToggleForm, isFormOpen }
               ...m,
               {
                 type: 'success',
-                text: '✓ GIẢI MÃ HOÀN TẤT [100%]. RESUME // HUYNH_NHAT_HUY_FRONTEND_ENGINEER.PDF',
+                text: '✓ SẴN SÀNG TẢI [100%]. RESUME // HUYNH_NHAT_HUY_FRONTEND_ENGINEER.PDF',
               },
               {
                 type: 'info',
@@ -244,7 +244,7 @@ export const CyberDeck: React.FC<CyberDeckProps> = ({ onToggleForm, isFormOpen }
           ...prev,
           {
             type: 'guide',
-            text: 'DANH SÁCH LỆNH HỆ THỐNG:\n• message   : Mở/Đóng form gửi thông điệp trực tiếp bên dưới\n• email     : Sao chép địa chỉ email vào clipboard\n• cv        : Kích hoạt giải mã hồ sơ năng lực PDF\n• fb        : Kết nối Facebook cá nhân (lệnh: facebook)\n• tiktok    : Xem kênh TikTok sáng tạo (lệnh: tt)\n• github    : Mở kho mã nguồn HuyDev19 (lệnh: git)\n• linkedin  : Kết nối mạng lưới chuyên môn\n• skills    : Liệt kê kho vũ khí công nghệ cốt lõi\n• clear     : Dọn sạch màn hình terminal\n• top       : Cuộn mượt về đầu trang',
+            text: 'DANH SÁCH LỆNH HỆ THỐNG:\n• message   : Mở/Đóng form gửi thông điệp trực tiếp bên dưới\n• email     : Sao chép địa chỉ email vào clipboard\n• cv        : Tải hồ sơ năng lực PDF (Resume)\n• fb        : Kết nối Facebook cá nhân (lệnh: facebook)\n• tiktok    : Xem kênh TikTok sáng tạo (lệnh: tt)\n• github    : Mở kho mã nguồn HuyDev19 (lệnh: git)\n• linkedin  : Kết nối mạng lưới chuyên môn\n• skills    : Liệt kê kho vũ khí công nghệ cốt lõi\n• clear     : Dọn sạch màn hình terminal\n• top       : Cuộn mượt về đầu trang',
           },
         ]);
         break;
@@ -295,7 +295,7 @@ export const CyberDeck: React.FC<CyberDeckProps> = ({ onToggleForm, isFormOpen }
 
       case 'cv':
       case 'resume':
-        triggerDecryptCV();
+        triggerDownloadCV();
         break;
 
       case 'skills':
@@ -510,11 +510,11 @@ export const CyberDeck: React.FC<CyberDeckProps> = ({ onToggleForm, isFormOpen }
               </div>
             ))}
 
-            {/* Decrypting Progress Bar Animation */}
+            {/* Download Progress Bar Animation */}
             {decryptProgress !== null && (
               <div className="bg-slate-900/90 border border-teal-500/50 p-2 rounded-lg font-mono text-xs">
                 <div className="flex justify-between text-teal-300 mb-1">
-                  <span>DECRYPTING CV DOSSIER...</span>
+                  <span>GENERATING CV DOSSIER...</span>
                   <span className="font-bold text-emerald-400">{decryptProgress}%</span>
                 </div>
                 <div className="w-full h-1.5 rounded-full bg-slate-800 overflow-hidden">
@@ -546,7 +546,7 @@ export const CyberDeck: React.FC<CyberDeckProps> = ({ onToggleForm, isFormOpen }
                 },
                 {
                   label: '💾 Tải CV',
-                  action: triggerDecryptCV,
+                  action: triggerDownloadCV,
                   highlight: false,
                 },
                 {
@@ -680,10 +680,10 @@ export const CyberDeck: React.FC<CyberDeckProps> = ({ onToggleForm, isFormOpen }
               </div>
             </button>
 
-            {/* Port 03: Quantum Decrypt CV */}
+            {/* Port 03: Download CV Drive */}
             <button
               type="button"
-              onClick={triggerDecryptCV}
+              onClick={triggerDownloadCV}
               onMouseEnter={() => soundManager.playHoverTick()}
               className="col-span-1 group p-2 sm:p-2.5 rounded-xl bg-gradient-to-r from-amber-950/40 to-slate-900 border border-amber-500/50 hover:border-amber-400 transition-all duration-200 flex flex-col justify-between text-left cursor-pointer active:translate-y-0.5 shadow-[0_0_12px_rgba(245,158,11,0.15)]"
             >
@@ -698,7 +698,7 @@ export const CyberDeck: React.FC<CyberDeckProps> = ({ onToggleForm, isFormOpen }
                   💾
                 </span>
                 <span className="font-mono text-[10.5px] sm:text-xs font-bold text-amber-300 group-hover:text-amber-200 truncate">
-                  TẢI CV ⬇
+                  DOWNLOAD CV ⬇
                 </span>
               </div>
             </button>
