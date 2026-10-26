@@ -103,9 +103,9 @@ export const CyberDeck: React.FC<CyberDeckProps> = ({ onToggleForm, isFormOpen }
     };
   }, []);
 
-  // Handle Mouse Move for 3D Tilt
+  // Handle Mouse Move for 3D Tilt (Desktop only to prevent awkward mobile touch tilting)
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (!deckRef.current) return;
+    if (!deckRef.current || (typeof window !== 'undefined' && window.innerWidth < 768)) return;
     const rect = deckRef.current.getBoundingClientRect();
     const x = (e.clientX - rect.left) / rect.width - 0.5;
     const y = (e.clientY - rect.top) / rect.height - 0.5;
@@ -369,7 +369,7 @@ export const CyberDeck: React.FC<CyberDeckProps> = ({ onToggleForm, isFormOpen }
           rotateY,
           transformStyle: 'preserve-3d',
         }}
-        className="relative rounded-3xl bg-[#0B101D] border-2 border-slate-700/80 shadow-[0_25px_80px_rgba(0,0,0,0.9),0_0_40px_rgba(45,212,191,0.08)] p-4 sm:p-6 md:p-7 overflow-hidden transition-shadow duration-300 hover:shadow-[0_35px_100px_rgba(0,0,0,0.95),0_0_50px_rgba(45,212,191,0.16)]"
+        className="relative rounded-2xl sm:rounded-3xl bg-[#0B101D] border-2 border-slate-700/80 shadow-[0_25px_80px_rgba(0,0,0,0.9),0_0_40px_rgba(45,212,191,0.08)] p-3 sm:p-6 md:p-7 overflow-hidden transition-shadow duration-300 hover:shadow-[0_35px_100px_rgba(0,0,0,0.95),0_0_50px_rgba(45,212,191,0.16)]"
       >
         {/* Dynamic Glass Glare Sweep */}
         <motion.div
@@ -421,23 +421,23 @@ export const CyberDeck: React.FC<CyberDeckProps> = ({ onToggleForm, isFormOpen }
         </div>
 
         {/* ── TOP HARDWARE STRIP (Metal Badge & LED Status) ── */}
-        <div className="relative z-10 flex flex-wrap items-center justify-between pb-2.5 border-b border-slate-700/60 mb-3 px-1">
+        <div className="relative z-10 flex flex-wrap items-center justify-between pb-2 border-b border-slate-700/60 mb-2.5 px-0.5 sm:px-1 gap-1.5 sm:gap-2">
           {/* Laser-etched Metal Badge */}
-          <div className="flex items-center gap-2">
-            <div className="px-2.5 py-0.5 rounded bg-[#070b14] border border-slate-700 flex items-center gap-2">
-              <span className="w-2 h-2 rounded-full bg-teal-400 shadow-[0_0_8px_#2dd4bf]" />
-              <span className="font-mono text-[10px] tracking-wider text-teal-300 font-bold uppercase">
-                CYBER_DECK MK-III // HUYNH NHAT HUY
+          <div className="flex items-center gap-1.5 sm:gap-2">
+            <div className="px-2 sm:px-2.5 py-0.5 rounded bg-[#070b14] border border-slate-700 flex items-center gap-1.5 sm:gap-2">
+              <span className="w-1.5 sm:w-2 h-1.5 sm:h-2 rounded-full bg-teal-400 shadow-[0_0_8px_#2dd4bf] shrink-0" />
+              <span className="font-mono text-[9px] sm:text-[10px] tracking-wider text-teal-300 font-bold uppercase">
+                CYBER_DECK MK-III <span className="hidden xs:inline sm:inline">// HUYNH NHAT HUY</span>
               </span>
             </div>
-            <span className="hidden sm:inline font-mono text-[9px] text-slate-500 uppercase tracking-widest">
+            <span className="hidden md:inline font-mono text-[9px] text-slate-500 uppercase tracking-widest">
               SER: HNH-2025-DEV
             </span>
             <button
               type="button"
               onClick={scrollToTop}
               onMouseEnter={() => soundManager.playHoverTick()}
-              className="px-2 py-0.5 rounded bg-slate-800/80 hover:bg-teal-500/20 text-slate-400 hover:text-teal-300 border border-slate-700 hover:border-teal-500/50 font-mono text-[9px] uppercase tracking-wider flex items-center gap-1 transition-all cursor-pointer"
+              className="px-1.5 sm:px-2 py-0.5 rounded bg-slate-800/80 hover:bg-teal-500/20 text-slate-400 hover:text-teal-300 border border-slate-700 hover:border-teal-500/50 font-mono text-[8.5px] sm:text-[9px] uppercase tracking-wider flex items-center gap-1 transition-all cursor-pointer"
               title="Cuộn về đầu trang"
             >
               <span>TOP</span>
@@ -446,18 +446,18 @@ export const CyberDeck: React.FC<CyberDeckProps> = ({ onToggleForm, isFormOpen }
           </div>
 
           {/* LED Status Indicators */}
-          <div className="flex items-center gap-3 font-mono text-[9px] text-slate-400">
-            <div className="flex items-center gap-1.5">
+          <div className="flex items-center gap-2 sm:gap-3 font-mono text-[8.5px] sm:text-[9px] text-slate-400 ml-auto sm:ml-0">
+            <div className="flex items-center gap-1">
               <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 shadow-[0_0_6px_#10b981]" />
               <span>PWR: ON</span>
             </div>
-            <div className="flex items-center gap-1.5">
+            <div className="flex items-center gap-1">
               <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 shadow-[0_0_6px_#22d3ee] animate-pulse" />
               <span>SYNC: {latency}ms</span>
             </div>
-            <div className="flex items-center gap-1.5">
+            <div className="flex items-center gap-1">
               <span className="w-1.5 h-1.5 rounded-full bg-amber-400 shadow-[0_0_6px_#f59e0b]" />
-              <span>HCM: {hcmTime || '17:28:00'}</span>
+              <span>HCM: {hcmTime || '19:00:00'}</span>
             </div>
           </div>
         </div>
@@ -467,7 +467,7 @@ export const CyberDeck: React.FC<CyberDeckProps> = ({ onToggleForm, isFormOpen }
           initial={{ scaleY: 0.05, filter: 'brightness(2.5)' }}
           animate={{ scaleY: isBooted ? 1 : 0.05, filter: isBooted ? 'brightness(1)' : 'brightness(2.5)' }}
           transition={{ duration: 0.35, ease: 'easeOut' }}
-          className="relative rounded-2xl bg-[#040914] border-2 border-teal-500/40 shadow-[inset_0_0_35px_rgba(45,212,191,0.12),0_8px_25px_rgba(0,0,0,0.8)] p-3.5 sm:p-4 md:p-5 overflow-hidden mb-4"
+          className="relative rounded-xl sm:rounded-2xl bg-[#040914] border-2 border-teal-500/40 shadow-[inset_0_0_35px_rgba(45,212,191,0.12),0_8px_25px_rgba(0,0,0,0.8)] p-2.5 sm:p-4 md:p-5 overflow-hidden mb-3"
         >
           {/* Scanline CRT overlay */}
           <div className="absolute inset-0 bg-[linear-gradient(rgba(18,16,16,0)_50%,rgba(0,0,0,0.45)_50%)] bg-[size:100%_4px] pointer-events-none z-20 opacity-80" />
@@ -476,7 +476,7 @@ export const CyberDeck: React.FC<CyberDeckProps> = ({ onToggleForm, isFormOpen }
           <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_65%,rgba(0,0,0,0.7)_100%)] pointer-events-none z-20" />
 
           {/* Terminal Screen Header */}
-          <div className="relative z-10 flex items-center justify-between pb-1.5 border-b border-teal-500/20 font-mono text-[9px] sm:text-[10px] text-teal-400/80 mb-2.5">
+          <div className="relative z-10 flex items-center justify-between pb-1.5 border-b border-teal-500/20 font-mono text-[8.5px] sm:text-[10px] text-teal-400/80 mb-2">
             <div className="flex items-center gap-1.5">
               <span className="w-1.5 h-1.5 rounded-full bg-teal-400 animate-ping" />
               <span>CONDUIT_RECEIVER // TELEMETRY TERMINAL</span>
@@ -484,12 +484,12 @@ export const CyberDeck: React.FC<CyberDeckProps> = ({ onToggleForm, isFormOpen }
             <span>CH: 142.850 MHz</span>
           </div>
 
-          {/* Terminal Logs Viewport (Separated Internal Scroll: Never scrolls window or pushes title) */}
+          {/* Terminal Logs Viewport */}
           <div
             ref={logsContainerRef}
             data-lenis-prevent="true"
             onWheel={(e) => e.stopPropagation()}
-            className="relative z-10 font-mono text-[11px] sm:text-xs md:text-sm text-teal-300 space-y-1 h-32 sm:h-36 md:h-40 overflow-y-auto pr-1.5 custom-scrollbar overscroll-contain select-text"
+            className="relative z-10 font-mono text-[10.5px] sm:text-xs md:text-sm text-teal-300 space-y-1 h-28 sm:h-36 md:h-40 overflow-y-auto pr-1.5 custom-scrollbar overscroll-contain select-text"
           >
             {messages.map((m, idx) => (
               <div
@@ -528,14 +528,14 @@ export const CyberDeck: React.FC<CyberDeckProps> = ({ onToggleForm, isFormOpen }
           </div>
 
           {/* Streamlined Command Shortcuts Toolbar */}
-          <div className="relative z-10 pt-2 border-t border-teal-500/20 flex flex-wrap items-center justify-between gap-1.5 mt-2.5">
-            <div className="flex items-center gap-1.5 overflow-x-auto no-scrollbar py-0.5">
-              <span className="font-mono text-[9px] text-teal-400/70 uppercase tracking-wider shrink-0 mr-1">
-                LỆNH NHANH:
+          <div className="relative z-10 pt-1.5 sm:pt-2 border-t border-teal-500/20 flex items-center justify-between gap-1.5 mt-2">
+            <div className="flex items-center gap-1.5 overflow-x-auto no-scrollbar py-0.5 flex-1 min-w-0 touch-pan-x">
+              <span className="hidden sm:inline font-mono text-[9px] text-teal-400/70 uppercase tracking-wider shrink-0 mr-0.5">
+                LỆNH:
               </span>
               {[
                 {
-                  label: isFormOpen ? '✕ Đóng form' : '✉ Gửi thông điệp',
+                  label: isFormOpen ? '✕ Đóng form' : '✉ Gửi thư',
                   action: triggerOpenForm,
                   highlight: true,
                 },
@@ -577,7 +577,7 @@ export const CyberDeck: React.FC<CyberDeckProps> = ({ onToggleForm, isFormOpen }
                   type="button"
                   onClick={chip.action}
                   onMouseEnter={() => soundManager.playHoverTick()}
-                  className={`px-2 py-0.5 rounded text-[10px] font-mono transition-colors cursor-pointer shrink-0 ${
+                  className={`px-2 py-0.5 rounded text-[9.5px] sm:text-[10px] font-mono transition-colors cursor-pointer shrink-0 whitespace-nowrap ${
                     chip.highlight
                       ? 'bg-teal-500/30 text-teal-200 border border-teal-400 font-bold hover:bg-teal-400 hover:text-slate-950'
                       : 'bg-teal-950/50 border border-teal-500/30 text-teal-300 hover:bg-teal-500 hover:text-slate-950'
@@ -598,7 +598,7 @@ export const CyberDeck: React.FC<CyberDeckProps> = ({ onToggleForm, isFormOpen }
                 }, 50);
               }}
               onMouseEnter={() => soundManager.playHoverTick()}
-              className="text-[9px] font-mono text-slate-500 hover:text-teal-300 transition-colors cursor-pointer ml-auto shrink-0"
+              className="text-[9px] font-mono text-slate-500 hover:text-teal-300 transition-colors cursor-pointer shrink-0 whitespace-nowrap pl-1"
               title="Xóa log terminal"
             >
               [ ✕ Clear ]
@@ -606,20 +606,20 @@ export const CyberDeck: React.FC<CyberDeckProps> = ({ onToggleForm, isFormOpen }
           </div>
 
           {/* Interactive Command Line Input */}
-          <form onSubmit={handleTerminalSubmit} className="relative z-10 mt-2 flex items-center gap-2">
-            <span className="font-mono text-[11px] sm:text-xs text-teal-400 font-bold shrink-0">
-              guest@cyberdeck:~$
+          <form onSubmit={handleTerminalSubmit} className="relative z-10 mt-2 flex items-center gap-1.5 sm:gap-2">
+            <span className="font-mono text-[10px] sm:text-xs text-teal-400 font-bold shrink-0">
+              <span className="hidden sm:inline">guest@cyberdeck:</span>~$
             </span>
             <input
               type="text"
               value={inputVal}
               onChange={(e) => setInputVal(e.target.value)}
-              placeholder="gõ lệnh (ví dụ: message, email, fb, tiktok, cv, skills)..."
-              className="flex-1 bg-transparent font-mono text-xs sm:text-sm text-white placeholder-teal-600/60 focus:outline-none"
+              placeholder="gõ lệnh (ví dụ: message, email, cv, skills)..."
+              className="flex-1 min-w-0 bg-transparent font-mono text-xs sm:text-sm text-white placeholder-teal-600/60 focus:outline-none"
             />
             <button
               type="submit"
-              className="px-2.5 py-0.5 rounded bg-teal-500/20 hover:bg-teal-500 hover:text-slate-950 border border-teal-500/50 text-[10px] font-mono text-teal-300 transition-colors cursor-pointer"
+              className="px-2 sm:px-2.5 py-0.5 rounded bg-teal-500/20 hover:bg-teal-500 hover:text-slate-950 border border-teal-500/50 text-[9px] sm:text-[10px] font-mono text-teal-300 transition-colors cursor-pointer shrink-0"
             >
               ENTER ↵
             </button>
@@ -628,27 +628,27 @@ export const CyberDeck: React.FC<CyberDeckProps> = ({ onToggleForm, isFormOpen }
 
         {/* ── LOWER TACTILE DECK (Organized into Core Consoles + Social Channels) ── */}
         <div className="relative z-10 space-y-2 px-0.5">
-          {/* ROW 1: 3 CORE TACTICAL CONSOLES */}
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 sm:gap-2.5">
-            {/* Port 01: Message Buffer Switch */}
+          {/* ROW 1: CORE TACTICAL CONSOLES (Responsive Grid) */}
+          <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 sm:gap-2.5">
+            {/* Port 01: Message Buffer Switch (Full width on mobile, 1 col on sm+) */}
             <button
               type="button"
               onClick={triggerOpenForm}
               onMouseEnter={() => soundManager.playHoverTick()}
-              className={`group p-2.5 rounded-xl border transition-all duration-200 flex flex-col justify-between text-left cursor-pointer active:translate-y-0.5 ${
+              className={`col-span-2 sm:col-span-1 group p-2 sm:p-2.5 rounded-xl border transition-all duration-200 flex flex-col justify-between text-left cursor-pointer active:translate-y-0.5 ${
                 isFormOpen
                   ? 'bg-teal-950/80 border-teal-400 shadow-[0_0_15px_rgba(45,212,191,0.3)]'
                   : 'bg-slate-900/90 border-slate-700 hover:border-teal-400'
               }`}
             >
               <div className="flex items-center justify-between mb-1">
-                <span className="font-mono text-[9px] text-slate-400 uppercase tracking-wider">
+                <span className="font-mono text-[8.5px] sm:text-[9px] text-slate-400 uppercase tracking-wider">
                   PORT 01 // DISPATCH BUFFER
                 </span>
                 <span className={`w-1.5 h-1.5 rounded-full ${isFormOpen ? 'bg-teal-400 animate-pulse' : 'bg-slate-500'}`} />
               </div>
               <div className="flex items-center gap-2">
-                <span className="w-5 h-5 rounded bg-teal-950 flex items-center justify-center text-teal-400 text-xs group-hover:scale-105 transition-transform">
+                <span className="w-5 h-5 rounded bg-teal-950 flex items-center justify-center text-teal-400 text-xs group-hover:scale-105 transition-transform shrink-0">
                   ✉
                 </span>
                 <span className="font-mono text-[11px] sm:text-xs font-bold text-white group-hover:text-teal-300">
@@ -662,20 +662,20 @@ export const CyberDeck: React.FC<CyberDeckProps> = ({ onToggleForm, isFormOpen }
               type="button"
               onClick={triggerEmail}
               onMouseEnter={() => soundManager.playHoverTick()}
-              className="group p-2.5 rounded-xl bg-slate-900/90 border border-slate-700 hover:border-emerald-400 transition-all duration-200 flex flex-col justify-between text-left cursor-pointer active:translate-y-0.5"
+              className="col-span-1 group p-2 sm:p-2.5 rounded-xl bg-slate-900/90 border border-slate-700 hover:border-emerald-400 transition-all duration-200 flex flex-col justify-between text-left cursor-pointer active:translate-y-0.5"
             >
               <div className="flex items-center justify-between mb-1">
-                <span className="font-mono text-[9px] text-slate-400 uppercase tracking-wider">
-                  PORT 02 // DIRECT FREQUENCY
+                <span className="font-mono text-[8.5px] sm:text-[9px] text-slate-400 uppercase tracking-wider truncate">
+                  PORT 02 // EMAIL
                 </span>
-                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 shrink-0" />
               </div>
-              <div className="flex items-center gap-2">
-                <span className="w-5 h-5 rounded bg-emerald-950 flex items-center justify-center text-emerald-400 text-xs group-hover:scale-105 transition-transform">
+              <div className="flex items-center gap-1.5 sm:gap-2">
+                <span className="w-5 h-5 rounded bg-emerald-950 flex items-center justify-center text-emerald-400 text-xs group-hover:scale-105 transition-transform shrink-0">
                   📋
                 </span>
-                <span className="font-mono text-[11px] sm:text-xs font-bold text-white group-hover:text-emerald-300">
-                  {copied ? '✓ ĐÃ COPY EMAIL' : 'SAO CHÉP EMAIL'}
+                <span className="font-mono text-[10.5px] sm:text-xs font-bold text-white group-hover:text-emerald-300 truncate">
+                  {copied ? '✓ ĐÃ COPY' : 'COPY EMAIL'}
                 </span>
               </div>
             </button>
@@ -685,20 +685,20 @@ export const CyberDeck: React.FC<CyberDeckProps> = ({ onToggleForm, isFormOpen }
               type="button"
               onClick={triggerDecryptCV}
               onMouseEnter={() => soundManager.playHoverTick()}
-              className="group p-2.5 rounded-xl bg-gradient-to-r from-amber-950/40 to-slate-900 border border-amber-500/50 hover:border-amber-400 transition-all duration-200 flex flex-col justify-between text-left cursor-pointer active:translate-y-0.5 shadow-[0_0_12px_rgba(245,158,11,0.15)]"
+              className="col-span-1 group p-2 sm:p-2.5 rounded-xl bg-gradient-to-r from-amber-950/40 to-slate-900 border border-amber-500/50 hover:border-amber-400 transition-all duration-200 flex flex-col justify-between text-left cursor-pointer active:translate-y-0.5 shadow-[0_0_12px_rgba(245,158,11,0.15)]"
             >
               <div className="flex items-center justify-between mb-1">
-                <span className="font-mono text-[9px] text-amber-300/80 uppercase tracking-wider">
-                  SLOT 03 // QUANTUM CV DRIVE
+                <span className="font-mono text-[8.5px] sm:text-[9px] text-amber-300/80 uppercase tracking-wider truncate">
+                  SLOT 03 // CV DRIVE
                 </span>
-                <span className="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse" />
+                <span className="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse shrink-0" />
               </div>
-              <div className="flex items-center gap-2">
-                <span className="w-5 h-5 rounded bg-amber-950 flex items-center justify-center text-amber-400 text-xs group-hover:scale-105 transition-transform">
+              <div className="flex items-center gap-1.5 sm:gap-2">
+                <span className="w-5 h-5 rounded bg-amber-950 flex items-center justify-center text-amber-400 text-xs group-hover:scale-105 transition-transform shrink-0">
                   💾
                 </span>
-                <span className="font-mono text-[11px] sm:text-xs font-bold text-amber-300 group-hover:text-amber-200">
-                  DECRYPT CV ⬇
+                <span className="font-mono text-[10.5px] sm:text-xs font-bold text-amber-300 group-hover:text-amber-200 truncate">
+                  TẢI CV ⬇
                 </span>
               </div>
             </button>
