@@ -12,17 +12,19 @@
 @tailwind components;
 @tailwind utilities;
 
-/* ─── CSS Custom Properties (Design Tokens) ─── */
+/* ─── CSS Custom Properties (Design Tokens - Dark Theme) ─── */
 :root {
+  color-scheme: dark;
+
   /* Surfaces */
-  --color-bg: #FAFAFA;
-  --color-bg-alt: #F4F4F5;
-  --color-bg-elevated: #FFFFFF;
+  --color-bg: #0B1120;
+  --color-bg-alt: #0F172A;
+  --color-bg-elevated: #1E293B;
 
   /* Text */
-  --color-text-primary: #18181B;
-  --color-text-secondary: #3F3F46;
-  --color-text-muted: #71717A;
+  --color-text-primary: #F8FAFC;
+  --color-text-secondary: #94A3B8;
+  --color-text-muted: #64748B;
 
   /* Accent */
   --color-accent: #2DD4BF;
@@ -30,10 +32,10 @@
   --color-accent-silver: #94A3B8;
 
   /* Borders */
-  --color-border: #E4E4E7;
+  --color-border: #1E293B;
 
   /* Scrollbar */
-  --scrollbar-thumb: #D4D4D8;
+  --scrollbar-thumb: #334155;
   --scrollbar-track: transparent;
 }
 

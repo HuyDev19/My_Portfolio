@@ -267,7 +267,7 @@ export default function HeroSection() {
         visibility: isPastHero ? 'hidden' : 'visible',
         pointerEvents: isPastHero ? 'none' : 'auto',
       }}
-      className="relative md:sticky md:top-0 overflow-hidden z-10 will-change-transform"
+      className="relative md:sticky md:top-0 overflow-hidden z-10 will-change-transform bg-[#060911]"
     >
       {/* ─── Global Noise / Film Grain Layer ─── */}
       <div className="fixed inset-0 pointer-events-none opacity-[0.03] z-[100] bg-[url('/noise.png')] mix-blend-difference"></div>

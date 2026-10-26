@@ -67,9 +67,8 @@ export const ContactSection = () => {
     <section
       id="contact"
       ref={containerRef}
-      className={`relative w-full bg-[#050811] text-white flex flex-col justify-center items-center min-h-screen ${
-        isFormOpen ? 'py-8 sm:py-12' : 'lg:h-screen py-4 sm:py-6'
-      }`}
+      className={`relative w-full bg-[#050811] text-white overflow-hidden flex flex-col justify-center items-center ${isFormOpen ? 'min-h-screen py-8 sm:py-12' : 'min-h-screen lg:h-screen py-4 sm:py-6'
+        }`}
     >
       {/* ── Background Cyber Blueprint Grid & Ambient Lights ── */}
       <div className="absolute inset-0 bg-[linear-gradient(to_right,#1e293b_1px,transparent_1px),linear-gradient(to_bottom,#1e293b_1px,transparent_1px)] bg-[size:3rem_3rem] [mask-image:radial-gradient(ellipse_75%_55%_at_50%_40%,#000_65%,transparent_100%)] opacity-20 pointer-events-none" />
@@ -153,11 +152,10 @@ export const ContactSection = () => {
                             soundManager.playButtonClick();
                             setSelectedTopic(topic);
                           }}
-                          className={`px-2.5 py-1 rounded-lg font-mono text-xs transition-all cursor-pointer ${
-                            isSelected
+                          className={`px-2.5 py-1 rounded-lg font-mono text-xs transition-all cursor-pointer ${isSelected
                               ? 'bg-teal-500/20 text-teal-300 border border-teal-500/60 shadow-[0_0_10px_rgba(45,212,191,0.2)] font-semibold'
                               : 'bg-slate-900/60 text-slate-400 border border-slate-800 hover:text-slate-200'
-                          }`}
+                            }`}
                         >
                           {isSelected ? '● ' : ''}
                           {topic}
@@ -222,13 +220,12 @@ export const ContactSection = () => {
                     type="submit"
                     disabled={isTransmitting}
                     onMouseEnter={() => soundManager.playHoverTick()}
-                    className={`w-full sm:w-auto px-6 py-2.5 rounded-xl font-mono text-xs font-bold uppercase tracking-wider transition-all duration-300 flex items-center justify-center gap-2 cursor-pointer ${
-                      isSent
+                    className={`w-full sm:w-auto px-6 py-2.5 rounded-xl font-mono text-xs font-bold uppercase tracking-wider transition-all duration-300 flex items-center justify-center gap-2 cursor-pointer ${isSent
                         ? 'bg-emerald-500 text-slate-950 shadow-[0_0_15px_rgba(16,185,129,0.4)]'
                         : isTransmitting
                           ? 'bg-teal-600 text-slate-950 opacity-80 cursor-wait'
                           : 'bg-teal-400 hover:bg-teal-300 text-slate-950 shadow-[0_0_15px_rgba(45,212,191,0.3)] hover:shadow-[0_0_25px_rgba(45,212,191,0.5)] hover:-translate-y-0.5'
-                    }`}
+                      }`}
                   >
                     {isSent ? (
                       <span>✓ ĐÃ GỬI TÍN HIỆU THÀNH CÔNG</span>

@@ -21,7 +21,7 @@ function App() {
 
   return (
     <>
-      <div className="relative min-h-screen">
+      <div className="relative min-h-screen bg-[#060911] text-white">
         <SmokeTrail />
         <Preloader />
         {/* ─── Fixed Header ─── */}
