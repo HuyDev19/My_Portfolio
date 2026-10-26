@@ -1,0 +1,202 @@
+/* ═══════════════════════════════════════════
+   Portfolio — Global Styles & Design Tokens
+   ═══════════════════════════════════════════ */
+
+/* ─── Google Fonts: Inter (sans) + JetBrains Mono (mono) ─── */
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap');
+@import url('https://api.fontshare.com/v2/css?f[]=clash-display@200,300,400,500,600,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ─── CSS Custom Properties (Design Tokens) ─── */
+:root {
+  /* Surfaces */
+  --color-bg: #FAFAFA;
+  --color-bg-alt: #F4F4F5;
+  --color-bg-elevated: #FFFFFF;
+
+  /* Text */
+  --color-text-primary: #18181B;
+  --color-text-secondary: #3F3F46;
+  --color-text-muted: #71717A;
+
+  /* Accent */
+  --color-accent: #2DD4BF;
+  --color-accent-hover: #14B8A6;
+  --color-accent-silver: #94A3B8;
+
+  /* Borders */
+  --color-border: #E4E4E7;
+
+  /* Scrollbar */
+  --scrollbar-thumb: #D4D4D8;
+  --scrollbar-track: transparent;
+}
+
+.dark {
+  /* Surfaces */
+  --color-bg: #0B1120;
+  --color-bg-alt: #0F172A;
+  --color-bg-elevated: #1E293B;
+
+  /* Text */
+  --color-text-primary: #F8FAFC;
+  --color-text-secondary: #94A3B8;
+  --color-text-muted: #64748B;
+
+  /* Accent — giữ nguyên cho cả 2 mode */
+  --color-accent: #2DD4BF;
+  --color-accent-hover: #14B8A6;
+  --color-accent-silver: #94A3B8;
+
+  /* Borders */
+  --color-border: #1E293B;
+
+  /* Scrollbar */
+  --scrollbar-thumb: #334155;
+  --scrollbar-track: transparent;
+}
+
+/* ─── Base Reset & Defaults ─── */
+@layer base {
+  *,
+  *::before,
+  *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  html {
+    font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    scroll-behavior: auto; /* Lenis sẽ quản lý smooth scroll */
+    background-color: var(--color-bg);
+    color: var(--color-text-primary);
+  }
+
+  body {
+    min-height: 100vh;
+    overflow-x: hidden;
+    background-color: var(--color-bg);
+    color: var(--color-text-primary);
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+
+  /* Selection highlight */
+  ::selection {
+    background-color: #2DD4BF;
+    color: #0B1120;
+  }
+
+  /* Smooth scrollbar (Webkit) */
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: var(--scrollbar-track);
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: var(--scrollbar-thumb);
+    border-radius: 9999px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--color-accent-silver);
+  }
+
+  /* Focus visible — accessibility */
+  :focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 2px;
+  }
+
+  /* Reduce motion for accessibility */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+
+  /* ─── Typography Defaults ─── */
+  h1, h2, h3, h4, h5, h6 {
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    color: var(--color-text-primary);
+  }
+
+  p {
+    color: var(--color-text-secondary);
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  img, video {
+    max-width: 100%;
+    display: block;
+  }
+
+  button {
+    cursor: pointer;
+    border: none;
+    background: none;
+    font: inherit;
+    color: inherit;
+  }
+}
+
+/* ─── Utility Components ─── */
+@layer components {
+  /* 12-column grid container chuẩn */
+  .grid-layout {
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    gap: 1.5rem;
+    max-width: 1440px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+
+  /* Section spacing nhất quán */
+  .section-padding {
+    padding-top: clamp(4rem, 8vw, 8rem);
+    padding-bottom: clamp(4rem, 8vw, 8rem);
+  }
+
+  /* GPU-accelerated element */
+  .gpu-accelerated {
+    will-change: transform, opacity;
+    transform: translateZ(0);
+    backface-visibility: hidden;
+  }
+}
+
+@layer utilities {
+  .font-clash {
+    font-family: 'Clash Display', sans-serif;
+  }
+  .font-sans {
+    font-family: 'Plus Jakarta Sans', 'Inter', sans-serif;
+  }
+  .font-serif {
+    font-family: 'Playfair Display', ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
+  }
+}
