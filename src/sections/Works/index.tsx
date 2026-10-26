@@ -15,6 +15,8 @@ import { soundManager } from '../../utils/sound';
 /*  DATA                                                               */
 /* ------------------------------------------------------------------ */
 
+const getAssetUrl = (path: string) => `${import.meta.env.BASE_URL}${path.replace(/^\//, '')}`;
+
 const PROJECTS = [
   {
     id: 1,
@@ -26,8 +28,13 @@ const PROJECTS = [
     url: 'https://nexuschat.app',
     displayTitle: ['REALTIME', 'ECOSYSTEM'],
     accentColor: '#7C3AED',
-    coverImage: '/Page1_P1.png',
-    galleryImages: ['/Page1_P2.png', '/Page1_P3.png', '/Page1_P4.png', '/Page1_P5.png'],
+    coverImage: getAssetUrl('Page1_P1.png'),
+    galleryImages: [
+      getAssetUrl('Page1_P2.png'),
+      getAssetUrl('Page1_P3.png'),
+      getAssetUrl('Page1_P4.png'),
+      getAssetUrl('Page1_P5.png'),
+    ],
     keywords: ['AESTHETICS', 'INTERACTION', 'PERFORMANCE'],
     metrics: [
       { value: '< 45ms', label: 'WEBRTC LATENCY', desc: 'P2P Ultra-Low Latency' },
@@ -68,8 +75,8 @@ const PROJECTS = [
     url: 'https://agentlaw.ai',
     displayTitle: ['AI-DRIVEN', 'ANALYSIS'],
     accentColor: '#0EA5E9',
-    coverImage: '/Page2_P1.png',
-    galleryImages: ['/Page2_P2.png'],
+    coverImage: getAssetUrl('Page2_P1.png'),
+    galleryImages: [getAssetUrl('Page2_P2.png')],
     keywords: ['AESTHETICS', 'INTERACTION', 'PERFORMANCE'],
     metrics: [
       { value: '10x', label: 'TỐC ĐỘ TRA CỨU', desc: 'Semantic Vector Retrieval' },
@@ -110,8 +117,8 @@ const PROJECTS = [
     url: 'https://carogomoku.net',
     displayTitle: ['NETWORK', 'GOMOKU'],
     accentColor: '#10B981',
-    coverImage: '/Page3_P1.png',
-    galleryImages: ['/Page3_P2.png'],
+    coverImage: getAssetUrl('Page3_P1.png'),
+    galleryImages: [getAssetUrl('Page3_P2.png')],
     keywords: ['AESTHETICS', 'INTERACTION', 'PERFORMANCE'],
     metrics: [
       { value: '0%', label: 'PACKET DROP', desc: 'Custom Binary Protocol' },
