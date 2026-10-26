@@ -67,8 +67,8 @@ export const ContactSection = () => {
     <section
       id="contact"
       ref={containerRef}
-      className={`relative w-full bg-[#050811] text-white flex flex-col justify-center items-center min-h-screen pt-20 sm:pt-24 lg:pt-6 pb-28 sm:pb-32 lg:pb-6 ${
-        isFormOpen ? 'lg:h-auto lg:min-h-screen lg:py-12' : 'lg:h-screen'
+      className={`relative w-full bg-[#050811] text-white flex flex-col justify-center items-center min-h-screen ${
+        isFormOpen ? 'py-8 sm:py-12' : 'lg:h-screen py-4 sm:py-6'
       }`}
     >
       {/* ── Background Cyber Blueprint Grid & Ambient Lights ── */}
@@ -82,22 +82,22 @@ export const ContactSection = () => {
       <motion.div
         animate={{ opacity: isInView ? 1 : 0.85, y: isInView ? 0 : 15 }}
         transition={{ duration: 0.6, ease: 'easeOut' }}
-        className="relative z-10 max-w-7xl mx-auto px-3.5 sm:px-6 lg:px-8 w-full flex-1 flex flex-col justify-center items-center my-auto"
+        className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full flex-1 flex flex-col justify-center items-center my-auto"
       >
         {/* Top Header Telemetry */}
-        <div className="text-center max-w-3xl mx-auto mb-3 sm:mb-4 px-2">
-          <div className="inline-flex items-center gap-1.5 sm:gap-2 px-2.5 sm:px-3 py-0.5 rounded-full bg-slate-900/80 border border-teal-500/30 mb-1.5 sm:mb-2 max-w-full">
-            <span className="w-1.5 h-1.5 rounded-full bg-teal-400 animate-ping shrink-0" />
-            <span className="font-mono text-[8px] sm:text-[10px] text-teal-300 tracking-wider sm:tracking-widest uppercase font-bold truncate">
-              <span className="hidden sm:inline">PHYSICAL HARDWARE // </span>CYBER_DECK DOCKING TERMINAL
+        <div className="text-center max-w-3xl mx-auto mb-3 sm:mb-4">
+          <div className="inline-flex items-center gap-2 px-3 py-0.5 rounded-full bg-slate-900/80 border border-teal-500/30 mb-1.5 sm:mb-2">
+            <span className="w-1.5 h-1.5 rounded-full bg-teal-400 animate-ping" />
+            <span className="font-mono text-[9px] sm:text-[10px] text-teal-300 tracking-widest uppercase font-bold">
+              PHYSICAL HARDWARE // CYBER_DECK DOCKING TERMINAL
             </span>
-            <span className="w-1.5 h-1.5 rounded-full bg-teal-400 shrink-0" />
+            <span className="w-1.5 h-1.5 rounded-full bg-teal-400" />
           </div>
 
-          <h2 className="font-serif text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-black uppercase tracking-tight text-white leading-none">
+          <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black uppercase tracking-tight text-white leading-none">
             INITIATE <span className="text-teal-400 font-normal italic">CONTACT</span>
           </h2>
-          <p className="font-sans text-[11px] sm:text-xs text-slate-400 mt-1 sm:mt-2 max-w-lg mx-auto leading-relaxed">
+          <p className="font-sans text-[11px] sm:text-xs text-slate-400 mt-1.5 sm:mt-2 max-w-lg mx-auto leading-relaxed">
             Tương tác trực tiếp trên thiết bị Cyber Deck vật lý hoặc gửi tín hiệu thông điệp nhanh bên dưới để kết nối với Huỳnh Nhất Huy.
           </p>
         </div>
