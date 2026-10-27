@@ -3,6 +3,6 @@ import { defineConfig } from 'vite'
 
 // https://vite.dev/config/
 export default defineConfig({
-  base: '/My_Portfolio/',
+  base: process.env.VERCEL ? '/' : '/My_Portfolio/',
   plugins: [react()],
 })
